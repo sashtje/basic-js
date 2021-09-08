@@ -14,12 +14,16 @@ import { NotImplementedError } from "../extensions/index.js";
 export default function getSeason(date) {
   if (date == undefined) return "Unable to determine the time of year!";
 
-  if (
-    !date ||
-    !(Object.prototype.toString.call(date) === "[object Date]") ||
-    isNaN(date)
-  )
-    throw "Invalid date!";
+  try {
+    if (
+      !date ||
+      !(Object.prototype.toString.call(date) === "[object Date]") ||
+      isNaN(date)
+    )
+      throw new Error("Invalid date!");
+  } catch {
+    throw new Error("Invalid date!");
+  }
 
   var month = date.getMonth();
   switch (month) {
