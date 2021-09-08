@@ -28,6 +28,10 @@
   },
   "homepage": "https://github.com/AlreadyBored/basic-js#readme",
   "devDependencies": {
+    "@babel/cli": "^7.15.4",
+    "@babel/core": "^7.15.5",
+    "@babel/node": "^7.15.4",
+    "@babel/preset-env": "^7.15.4",
     "chai": "^4.3.4",
     "mocha": "^9.1.0",
     "sinon": "^11.1.2"
