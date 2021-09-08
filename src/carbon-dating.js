@@ -23,7 +23,9 @@ export default function dateSample(sampleActivity) {
   if (
     isNaN(sampleActivity) ||
     isNaN(parseFloat(sampleActivity)) ||
-    sampleActivity <= 0
+    typeof sampleActivity != "string" ||
+    sampleActivity <= 0 ||
+    sampleActivity > 15
   )
     return false;
 
