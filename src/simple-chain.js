@@ -1,28 +1,66 @@
-import { NotImplementedError } from '../extensions/index.js';
+import { NotImplementedError } from "../extensions/index.js";
 
 /**
  * Implement chainMaker object according to task description
- * 
+ *
  */
 export default {
+  chain: "",
+  length: 0,
+
   getLength() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    return this.length;
   },
-  addLink(/* value */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+
+  addLink(value) {
+    var newLink;
+    if (arguments.length == 0) newLink = "( )";
+    else if (value === undefined) newLink = "( undefined )";
+    else if (value === null) newLink = "( null )";
+    else if (Number.isNaN(value)) newLink = "( NaN )";
+    else newLink = "( " + value + " )";
+    if (this.length == 0) this.chain += newLink;
+    else this.chain += "~~" + newLink;
+    this.length++;
+
+    return this;
   },
-  removeLink(/* position */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+
+  removeLink(position) {
+    if (
+      Number.isInteger(position) &&
+      position >= 1 &&
+      position <= this.length
+    ) {
+      if (this.length == 1) {
+        this.chain = "";
+        this.length = 0;
+      } else {
+        var arr = this.chain.split("~~");
+        arr = arr.slice(0, position - 1).concat(arr.slice(position));
+        this.chain = arr.join("~~");
+        this.length--;
+      }
+
+      return this;
+    } else {
+      //wrong position
+      this.chain = "";
+      this.length = 0;
+      throw new Error("You can't remove incorrect link!");
+    }
   },
+
   reverseChain() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    this.chain = this.chain.split("~~").reverse().join("~~");
+
+    return this;
   },
+
   finishChain() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
-  }
+    var result = this.chain;
+    this.chain = "";
+    this.length = 0;
+    return result;
+  },
 };
