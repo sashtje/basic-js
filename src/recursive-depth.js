@@ -12,8 +12,16 @@ import { NotImplementedError } from "../extensions/index.js";
  * depthCalc.calculateDepth([[[]]]) => 3
  *
  */
+
+function hasArr(arr) {
+  for (var i = 0; i < arr.length; i++) if (Array.isArray(arr[i])) return true;
+
+  return false;
+}
 export default class DepthCalculator {
   calculateDepth(arr) {
-    
+    if (!hasArr(arr)) return 1;
+
+    return 1 + this.calculateDepth(arr.flat());
   }
 }
